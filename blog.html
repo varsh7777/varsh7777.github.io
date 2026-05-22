@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog / Life — Sri Varshitha Pinnaka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a22; --ink-soft: #4a4a58; --ink-faint: #9898a8;
+    --paper: #f7f6f2; --paper-warm: #efeee8;
+    --rain: #6b8fa3; --rain-light: #c8dce8; --rain-dark: #3d5f74;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--paper); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+  #rain-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.18; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(247, 246, 242, 0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107, 143, 163, 0.12);
+  }
+  .nav-logo {
+    font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+    letter-spacing: 0.04em; color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-logo .drop {
+    display: inline-block; width: 6px; height: 6px; background: var(--rain);
+    border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+    animation: dropfall 3s ease-in-out infinite;
+  }
+  @keyframes dropfall {
+    0%, 100% { transform: rotate(-45deg) translateY(0); opacity: 1; }
+    50% { transform: rotate(-45deg) translateY(3px); opacity: 0.6; }
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
+    text-decoration: none; position: relative; padding-bottom: 2px; transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 1px; background: var(--rain); transition: width 0.3s var(--ease);
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--rain-dark); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .page-inner {
+    max-width: 680px; margin: 0 auto; padding: 6rem 2rem 6rem;
+    position: relative; z-index: 1;
+  }
+  .back-link {
+    display: inline-block; font-size: 0.78rem; letter-spacing: 0.08em;
+    color: var(--rain); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--rain-dark); }
+  .blog-page-title {
+    font-family: var(--font-display); font-size: 2.4rem; font-weight: 400;
+    color: var(--ink); margin-bottom: 3rem;
+  }
+  .post-entry {
+    display: flex; align-items: baseline; gap: 1.2rem;
+    padding: 0.75rem 0; border-bottom: 1px solid var(--paper-warm);
+  }
+  .post-entry:last-child { border-bottom: none; }
+  .post-entry-date {
+    font-size: 0.75rem; color: var(--rain); letter-spacing: 0.06em;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .post-entry-link {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 400;
+    color: var(--ink); text-decoration: underline; text-underline-offset: 3px;
+    text-decoration-color: var(--rain-light); transition: color 0.2s, text-decoration-color 0.2s;
+  }
+  .post-entry-link:hover { color: var(--rain-dark); text-decoration-color: var(--rain); }
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .page-inner { padding: 5rem 1.5rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<canvas id="rain-canvas"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo"><span class="drop"></span>Sri Varshitha Pinnaka</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html" onclick="sessionStorage.setItem('page','work')">Work</a></li>
+    <li><a href="index.html" onclick="sessionStorage.setItem('page','personal')" class="active">Personal</a></li>
+    <li><a href="cv.pdf" target="_blank">CV</a></li>
+  </ul>
+</nav>
+<div class="page-inner">
+  <a href="index.html" class="back-link">← Personal</a>
+  <h1 class="blog-page-title">Blog / Life</h1>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TO ADD A NEW POST:
+       1. Create posts/your-post-name.html (copy intro.html)
+       2. Add a new .post-entry line below, newest at top
+       ═══════════════════════════════════════════════════════ -->
+
+  <div class="post-entry">
+    <span class="post-entry-date">May 2026</span>
+    <a class="post-entry-link" href="posts/intro.html">Intro / About Me</a>
+  </div>
+
+  <!-- paste new entries above this line, newest first -->
+
+</div>
+<script>
+const canvas = document.getElementById('rain-canvas');
+const ctx = canvas.getContext('2d');
+let drops = [];
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+function spawnDrop() {
+  return { x: Math.random()*canvas.width, y: -20-Math.random()*200,
+    len: 10+Math.random()*20, speed: 4+Math.random()*5,
+    opacity: 0.3+Math.random()*0.5, width: 0.6+Math.random()*0.8 };
+}
+for (let i=0; i<80; i++) { drops.push(spawnDrop()); drops[i].y = Math.random()*canvas.height; }
+function drawRain() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drops.forEach(d => {
+    ctx.beginPath(); ctx.moveTo(d.x,d.y); ctx.lineTo(d.x-d.len*0.18, d.y+d.len);
+    ctx.strokeStyle='rgba(107,143,163,'+d.opacity+')'; ctx.lineWidth=d.width; ctx.lineCap='round'; ctx.stroke();
+    d.y+=d.speed; d.x-=d.speed*0.18;
+    if(d.y>canvas.height+30) Object.assign(d,spawnDrop());
+  });
+  requestAnimationFrame(drawRain);
+}
+drawRain();
+</script>
+</body>
+</html>
