@@ -620,6 +620,49 @@
     font-style: italic;
   }
 
+  .writing-header {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .writing-section {
+    margin-bottom: 2rem;
+  }
+
+  .writing-course {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--rain-dark);
+    margin-bottom: 0.7rem;
+  }
+
+  .writing-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .writing-link {
+    font-size: 0.9rem;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--rain-light);
+    transition: text-decoration-color 0.2s, color 0.2s;
+    line-height: 1.5;
+  }
+
+  .writing-link:hover {
+    color: var(--rain-dark);
+    text-decoration-color: var(--rain);
+  }
+
   /* ── CV simple ──────────────────────────────────────────── */
   .cv-simple {
     display: flex;
@@ -968,25 +1011,41 @@
     <div id="subpage-blog" class="subpage-content" style="display:none;">
       <button class="back-btn" onclick="hideSubpage()">← Back</button>
       <h2 class="subpage-title">Blog / Life</h2>
-      <p class="subpage-placeholder">Coming soon — thoughts, updates, and things worth writing down.</p>
     </div>
 
     <div id="subpage-reading" class="subpage-content" style="display:none;">
       <button class="back-btn" onclick="hideSubpage()">← Back</button>
       <h2 class="subpage-title">Reading</h2>
-      <p class="subpage-placeholder">Coming soon — books, papers, and things I keep returning to.</p>
     </div>
 
     <div id="subpage-writing" class="subpage-content" style="display:none;">
       <button class="back-btn" onclick="hideSubpage()">← Back</button>
       <h2 class="subpage-title">Writing</h2>
-      <p class="subpage-placeholder">Coming soon — essays, drafts, and things I've put into words.</p>
+
+      <p class="writing-header">Select work from my time in university</p>
+
+      <div class="writing-section">
+        <div class="writing-course">NEUSCI 302: Introduction to Systems and Behavioral Neuroscience</div>
+        <ul class="writing-list">
+          <li><a href="https://docs.google.com/document/d/1yRyTWjy0lgV0sntwKjXbaCbpbWHysJ1fiPBlyp3fZFY/edit?usp=sharing" target="_blank" class="writing-link">Final Project: Phototransduction in the Bumblebee (<em>Bombus impatiens</em>)</a></li>
+          <li><a href="https://docs.google.com/document/d/1MEmGljM5BCuUrMhwfJbG5hivkBXqk-MvjZbRXwoKAu4/edit?usp=sharing" target="_blank" class="writing-link">Electromyographs of Cockroach Flight Muscles: Behavioral Evidence for the Existence of Central Pattern Generators</a></li>
+          <li><a href="https://docs.google.com/document/d/10tgFAZW0ThLmCoLv3WTwMwF0BMIeGS76Q__RdwCqh4c/edit?usp=sharing" target="_blank" class="writing-link">Recording the Electroretinogram from the Flesh Fly</a></li>
+          <li><a href="https://docs.google.com/document/d/1yVv22UJGB54crCYAB_DExP15t4LJtMeoYLHo9FuhF98/edit?usp=sharing" target="_blank" class="writing-link">Profiling Mechanosensory Responses in the Cockroach Leg</a></li>
+        </ul>
+      </div>
+
+      <div class="writing-section">
+        <div class="writing-course">HSTAS 202: Introduction to South Asian History, 1500 – present</div>
+        <ul class="writing-list">
+          <li><a href="https://docs.google.com/document/d/1j6x2C953S0CxTn-D02ctUOmCJvE3wiuR5DQX1QTuKG0/edit?usp=sharing" target="_blank" class="writing-link">Gandhi (1982) as an Introductory Educational Tool to South Asian History</a></li>
+          <li><a href="https://docs.google.com/document/d/17kOvdQ9f8_tVt9bPUOAHDIByWoIQSqiBNgVzEHtK17Y/edit?usp=sharing" target="_blank" class="writing-link">Kabir's Poems: Rejection of Caste in 15th-Century India</a></li>
+        </ul>
+      </div>
     </div>
 
     <div id="subpage-music" class="subpage-content" style="display:none;">
       <button class="back-btn" onclick="hideSubpage()">← Back</button>
       <h2 class="subpage-title">Music</h2>
-      <p class="subpage-placeholder">Coming soon — what I listen to, what I love, and what stays with me.</p>
     </div>
 
   </div>
