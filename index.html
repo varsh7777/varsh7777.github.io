@@ -565,6 +565,14 @@
   }
 
   /* ── Personal sub-pages ─────────────────────────────────── */
+  .personal-intro {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+    max-width: 580px;
+  }
+
   .subpage-list {
     display: flex;
     flex-direction: column;
@@ -999,9 +1007,11 @@
 <div id="personal" class="page">
   <div class="page-inner">
 
+    <p class="personal-intro">When I'm not working, you can find me spending time with my friends, bouldering at SBP, going on long walks, or reading! Learn more about what I've been up to by clicking any of the links below.</p>
+
     <!-- Sub-page menu -->
     <div id="personal-menu" class="subpage-list">
-      <a class="subpage-link" onclick="showSubpage('blog'); return false;" href="#">Blog / Life</a>
+      <a class="subpage-link" href="blog.html">Blog / Life</a>
       <a class="subpage-link" onclick="showSubpage('reading'); return false;" href="#">Reading</a>
       <a class="subpage-link" onclick="showSubpage('writing'); return false;" href="#">Writing</a>
       <a class="subpage-link" onclick="showSubpage('music'); return false;" href="#">Music</a>
@@ -1022,7 +1032,7 @@
       <button class="back-btn" onclick="hideSubpage()">← Back</button>
       <h2 class="subpage-title">Writing</h2>
 
-      <p class="writing-header">Select writing from my time in university:</p>
+      <p class="writing-header">Select work from my time in university</p>
 
       <div class="writing-section">
         <div class="writing-course">NEUSCI 302: Introduction to Systems and Behavioral Neuroscience</div>
