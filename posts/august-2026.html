@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>August 2026 — Sri Varshitha Pinnaka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a22; --ink-soft: #4a4a58; --ink-faint: #9898a8;
+    --paper: #f7f6f2; --paper-warm: #efeee8;
+    --rain: #6b8fa3; --rain-light: #c8dce8; --rain-dark: #3d5f74;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--paper); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+  #rain-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.18; }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(247,246,242,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107,143,163,0.12);
+  }
+  .nav-logo {
+    font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+    letter-spacing: 0.04em; color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-logo .drop {
+    display: inline-block; width: 6px; height: 6px; background: var(--rain);
+    border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+    animation: dropfall 3s ease-in-out infinite;
+  }
+  @keyframes dropfall {
+    0%, 100% { transform: rotate(-45deg) translateY(0); opacity: 1; }
+    50% { transform: rotate(-45deg) translateY(3px); opacity: 0.6; }
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
+    text-decoration: none; position: relative; padding-bottom: 2px; transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 1px; background: var(--rain); transition: width 0.3s var(--ease);
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--rain-dark); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+  /* Post layout */
+  .page-inner {
+    max-width: 680px; margin: 0 auto; padding: 6rem 2rem 6rem;
+    position: relative; z-index: 1;
+  }
+  .back-link {
+    display: inline-block; font-size: 0.78rem; letter-spacing: 0.08em;
+    color: var(--rain); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--rain-dark); }
+
+  .post-date {
+    font-size: 0.75rem; letter-spacing: 0.1em; color: var(--rain);
+    text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .post-title {
+    font-family: var(--font-display); font-size: 2.4rem; font-weight: 400;
+    color: var(--ink); line-height: 1.1; margin-bottom: 2.5rem;
+  }
+
+  /* Body text */
+  .post-body { font-size: 0.92rem; line-height: 1.85; color: var(--ink-soft); }
+  .post-body p + p { margin-top: 1rem; }
+  .post-body h2 {
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 400;
+    color: var(--ink); margin: 2rem 0 0.6rem;
+  }
+
+  /* Images */
+  .post-img {
+    width: 100%; border-radius: 3px; display: block;
+    margin: 1.8rem 0; filter: saturate(0.92);
+  }
+  .post-img-caption {
+    font-size: 0.75rem; color: var(--ink-faint); font-style: italic;
+    text-align: center; margin-top: -1.2rem; margin-bottom: 1.8rem;
+  }
+  /* Side-by-side images: wrap two .post-img-half in a .post-img-row */
+  .post-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.8rem 0; }
+  .post-img-half { width: 100%; border-radius: 3px; display: block; filter: saturate(0.92); }
+
+  /* Photo album */
+  .album {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rain-light);
+  }
+  .album-label {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--rain); margin-bottom: 1.2rem;
+  }
+  .album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.6rem;
+  }
+  .album-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .album-item img {
+    width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 3px;
+    display: block; filter: saturate(0.9); cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .album-item img:hover { opacity: 0.88; }
+  .album-caption { font-size: 0.72rem; color: var(--ink-faint); font-style: italic; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(26,26,34,0.92); align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw; max-height: 88vh; border-radius: 3px;
+    object-fit: contain; filter: saturate(0.92);
+  }
+  .lightbox-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    font-size: 1.5rem; color: rgba(255,255,255,0.6);
+    cursor: pointer; line-height: 1; transition: color 0.2s;
+    background: none; border: none; font-family: var(--font-body);
+  }
+  .lightbox-close:hover { color: #fff; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .page-inner { padding: 5rem 1.5rem 4rem; }
+    .album-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="rain-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo"><span class="drop"></span>Sri Varshitha Pinnaka</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html">Work</a></li>
+    <li><a href="../blog.html" class="active">Personal</a></li>
+    <li><a href="../cv.pdf" target="_blank">CV</a></li>
+  </ul>
+</nav>
+
+<div class="page-inner">
+  <a href="../blog.html" class="back-link">← Blog / Life</a>
+
+  <div class="post-date">August 2026</div>
+  <h1 class="post-title">August 2026</h1>
+
+  <div class="post-body">
+
+    <p>It's been a while since I updated my personal website! Since I last wrote, I graduated from university (wow), went on a grad trip with some friends, took some time off, and started training as a medical assistant. There were multiple really sad goodbyes during these months, but I've learned a lot and settled into a (sort of) routine postgrad.</p>
+
+    <p>Working has been both very fun and challenging. I've been told that the job gets boring after the first year, but for now, I think it's very cool, and I've been learning a lot. I've learned the standard things: giving vaccinations, taking vitals, running POC/labs, and rooming people. I've also learned a lot about how to make patients feel better when they're feeling down. Recently, a younger patient came in and was super overwhelmed during a blood draw. I just talked to him through it about school, interests, etc., and it did a really good job distracting him. I think I just gain a sense of fulfilment from being able to help other people, regardless of how. I also talk to a lot of people who are very mentally or physically sick (or both). I feel like I've learned a lot about what it actually means to care for others, as well as what is required for people to thrive (rather than just survive).</p>
+
+    <p>The environment at the clinic is also really different than places I've worked before. The patients I see are of a totally different demographic than any population I've worked with or any community/friend group I've been part of. The other MAs are all kinds of people as well. There's not really many of the sort of people I'd be surrounded with during university. The same goes for the doctors. It's not exactly a bad thing, since I feel like it's nice to gain different perspectives. Everyone is really nice and likes me. But it's certainly different. It makes me miss the groups/communities I spent time in during university.</p>
+
+    <p>One really big change has been saying bye to the most impactful people I've ever met after undergrad ended. It's been bittersweet, and I hope to stay in touch with everyone as much as possible. I think it's also a good way to reflect on my own values/perspectives on relationships and take steps to grow on my own. Not everyone is gone, but I think this time will be a good exercise to re-learn how to make new friends. To be honest, I have no idea how to make new friends as an adult.</p>
+
+    <p>Regardless, I've been brainstorming ways to do exactly that. Recently, I watched a YouTube video about how the author of Fullmetal Alchemist: Brotherhood grew up on a farm. This led me to discover Silver Spoon, which I binged over Labor Day weekend (maybe not the most productive use of my time, but I enjoyed it anyway). I REALLY enjoyed Silver Spoon. I think I like the idea of doing something physical (farming in this instance) and seeing the fruits of your labor as satisfying, as well as the sense of community that the main character gains. It's also made me want to start horseback riding, which I've been looking into more seriously.</p>
+
+    <p>But taking horseback riding lessons might mean that most of the people I meet might be children, since I'm not sure if a lot of people in their early twenties do it for fun. I've also been entertaining the idea of joining the adult climbing team or taking cooking lessons.</p>
+
+    <p>Aside from these friend-making schemes, I've also been hard at work on a personal statement for the Luce Scholars program, amongst others. My personal goal is to spend a year before medical school trying to explore somewhere new/different than Seattle. I've sort of been influenced by my peers who say that they want to see the world/make new friends in new places, but I also believe that I could gain some good perspectives by doing this. By writing my personal statement, I spent a good amount of time reflecting on my motivations, and I think I articulated them faithfully. I think writing personal statements is actually just a pretty good excuse to journal.</p>
+
+    <p>The question I keep coming back to is, how can I move forward after experiencing great loss? There's the loss of the value structures tied to university that I relied on for five years, the loss of community as my friend group becomes spread out and as more people I knew at UW graduate/leave, as well as other really impactful personal losses earlier this year. Although it's been important to stay connected with people who care about me, I'm starting to understand that the answer probably has more to do with how I go about life and rebuilding meaning after losing it. It's been really hard, but I persist.</p>
+
+  </div>
+
+  <!--
+  <div class="album">
+    <div class="album-grid">
+      <div class="album-item">
+        <img src="images/august-2026/photo1.jpg" alt="">
+        <p class="album-caption">Caption here</p>
+      </div>
+    </div>
+  </div>
+  -->
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src, alt) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt || '';
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+/* attach lightbox to all album images */
+document.querySelectorAll('.album-item img').forEach(img => {
+  img.addEventListener('click', e => { e.stopPropagation(); openLightbox(img.src, img.alt); });
+});
+
+const canvas = document.getElementById('rain-canvas');
+const ctx = canvas.getContext('2d');
+let drops = [];
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+function spawnDrop() {
+  return { x: Math.random()*canvas.width, y: -20-Math.random()*200,
+    len: 10+Math.random()*20, speed: 4+Math.random()*5,
+    opacity: 0.3+Math.random()*0.5, width: 0.6+Math.random()*0.8 };
+}
+for (let i=0; i<80; i++) { drops.push(spawnDrop()); drops[i].y = Math.random()*canvas.height; }
+function drawRain() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drops.forEach(d => {
+    ctx.beginPath(); ctx.moveTo(d.x,d.y); ctx.lineTo(d.x-d.len*0.18,d.y+d.len);
+    ctx.strokeStyle='rgba(107,143,163,'+d.opacity+')'; ctx.lineWidth=d.width; ctx.lineCap='round'; ctx.stroke();
+    d.y+=d.speed; d.x-=d.speed*0.18;
+    if(d.y>canvas.height+30) Object.assign(d,spawnDrop());
+  });
+  requestAnimationFrame(drawRain);
+}
+drawRain();
+</script>
+</body>
+</html>
